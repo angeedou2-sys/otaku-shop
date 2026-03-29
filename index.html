@@ -1,76 +1,1060 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AD&MI Otaku's</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AD&M Otaku's — Boutique de figurines, vêtements et articles anime au Gabon. Commandez vos articles de culture japonaise." />
+  <meta name="theme-color" content="#070710" />
+  <title>AD&M Otaku's | Boutique Anime & Culture Japonaise — Gabon</title>
+
+  <!-- Favicon inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩️</text></svg>" />
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="bg-dark text-light"> <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="logo.png" alt="Logo AD&MI" width="40" class="d-inline-block align-text-top me-2">
-                <span>AD&MI <span class="text-neon-pink">O</span>taku's</span>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE LOADER
+══════════════════════════════════════════════════════════ -->
+<div id="pageLoader">
+  <div class="loader-logo display-font">AD&M Otaku's</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-text jp-text">読み込み中 · Chargement</div>
+</div>
+
+<!-- Particles -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Back to Top -->
+<a href="#" id="backToTop" aria-label="Retour en haut">
+  <i class="bi bi-chevron-up"></i>
+</a>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav id="mainNav" class="navbar navbar-expand-lg py-3">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand-wrap" href="#hero">
+      <img src="images/logo.png" alt="AD&M Otaku's Logo" class="navbar-logo"
+           onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 60 60\'><circle cx=\'30\' cy=\'30\' r=\'30\' fill=\'%230d0d1a\'/><text x=\'50%25\' y=\'55%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'22\' fill=\'%23c9a84c\'>⛩</text></svg>'" />
+      <div>
+        <div class="brand-name">AD&M Otaku's</div>
+        <div class="brand-sub">アニメ ショップ · Gabon</div>
+      </div>
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler border-0 ms-auto me-2" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link-custom active" href="#hero">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#shop">Boutique</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#featured">Nouveautés</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#about-page">À Propos</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#blog">Blog</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+        <!-- Dark mode -->
+        <button class="dark-mode-btn" id="darkModeToggle" title="Mode sombre/clair">🌙</button>
+
+        <!-- Cart -->
+        <button class="btn-secondary-custom position-relative py-2 px-3"
+                style="border-radius:2px"
+                data-bs-toggle="modal" data-bs-target="#cartModal">
+          <i class="bi bi-bag"></i>
+          <span id="cartBadge"
+                style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;
+                       background:var(--magenta);border-radius:50%;font-size:.6rem;
+                       color:white;display:none;align-items:center;justify-content:center;
+                       font-family:var(--font-title)">0</span>
+        </button>
+
+        <!-- WhatsApp CTA -->
+        <a href="https://wa.me/24174837720" target="_blank" class="nav-cta">
+          Commander
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content container">
+    <p class="hero-eyebrow jp-text">✦ アニメ & ポップカルチャー ✦</p>
+
+    <h1 class="hero-title display-font">
+      AD&M<br>Otaku's
+    </h1>
+
+    <p class="hero-subtitle">Boutique Anime & Culture Japonaise</p>
+    <p class="hero-tagline text-dim">
+      Figurines · Vêtements · Accessoires · Pop Culture<br>
+      Livraison au Gabon 🇬🇦
+    </p>
+
+    <div class="hero-cta-group">
+      <a href="#shop" class="btn-primary-custom">
+        Explorer la boutique
+      </a>
+      <a href="https://wa.me/24174837720" target="_blank" class="btn-secondary-custom">
+        <i class="bi bi-whatsapp me-2"></i>Commander sur WhatsApp
+      </a>
+    </div>
+
+    <!-- Rune ornament -->
+    <div class="mt-5" style="display:flex;align-items:center;justify-content:center;gap:1rem;opacity:.4">
+      <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))"></div>
+      <span style="color:var(--gold);font-size:.8rem">⛩</span>
+      <div style="width:80px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <span>Défiler</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURES STRIP
+══════════════════════════════════════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label jp-text">なぜ私たちを選ぶのか</span>
+      <h2 class="section-title display-font">Pourquoi nous choisir ?</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card">
+          <span class="feature-icon">📦</span>
+          <h4>Sans frais cachés</h4>
+          <p>Aucun frais de douane ni de kilo à payer. Prix transparents, paiement en deux tranches.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card">
+          <span class="feature-icon">🚚</span>
+          <h4>Livraison rapide</h4>
+          <p>Libreville : 2 000 FCFA · Akanda/Owendo : 3 000 FCFA. Livraison en 2 à 3 semaines.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card">
+          <span class="feature-icon">💜</span>
+          <h4>Large sélection</h4>
+          <p>Figurines, vêtements, accessoires issus de la culture anime & pop culture japonaise.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card">
+          <span class="feature-icon">📲</span>
+          <h4>Commande facile</h4>
+          <p>Envoyez une capture d'écran de l'article souhaité sur WhatsApp et nous nous en chargeons.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BOUTIQUE
+══════════════════════════════════════════════════════════ -->
+<section id="shop">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label jp-text">ショップ</span>
+      <h2 class="section-title display-font">Notre Boutique</h2>
+      <p class="section-desc">Explorez notre sélection d'articles anime & culture japonaise</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="shop-filter reveal">
+      <button class="filter-btn active" data-filter="all">Tout</button>
+      <button class="filter-btn" data-filter="figurines">Figurines</button>
+      <button class="filter-btn" data-filter="vetements">Vêtements</button>
+      <button class="filter-btn" data-filter="accessoires">Accessoires</button>
+      <button class="filter-btn" data-filter="posters">Posters</button>
+      <button class="filter-btn" data-filter="goodies">Goodies</button>
+    </div>
+
+    <div class="row g-4" id="productsGrid">
+
+      <!-- Product 1 — Figurine Gojo -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="figurines">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Figurine-Gojo.jpg" alt="Figurine Satoru Gojo" />
+            <span class="product-badge hot">Populaire</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="fig-001"
+                      data-product-name="Figurine JJK — Satoru Gojo" data-product-price="22000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Figurines</div>
+            <div class="product-name">Figurine Jujutsu Kaisen — Satoru Gojo 1/6</div>
+            <div class="product-price"><span class="currency">FCFA </span>22 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 — Figurine Itachi -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="figurines">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Figurine-Itashi.jpg" alt="Figurine Itachi Uchiha" />
+            <span class="product-badge new">Nouveau</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="fig-002"
+                      data-product-name="Figurine Naruto — Itachi Uchiha" data-product-price="18000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Figurines</div>
+            <div class="product-name">Figurine Naruto — Itachi Uchiha Chibi</div>
+            <div class="product-price"><span class="currency">FCFA </span>18 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 — Figurine Madara -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="figurines">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Figurine-Madara.jpg" alt="Figurine Madara Uchiha" />
+            <span class="product-badge hot">Coup de cœur</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="fig-003"
+                      data-product-name="Figurine Naruto — Madara Uchiha" data-product-price="20000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Figurines</div>
+            <div class="product-name">Figurine Naruto — Madara Uchiha 1/6</div>
+            <div class="product-price"><span class="currency">FCFA </span>20 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 — Figurine Pain -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="figurines">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Figurine-pain.jpg" alt="Figurine Pain Naruto" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="fig-004"
+                      data-product-name="Figurine Naruto — Pain" data-product-price="15000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Figurines</div>
+            <div class="product-name">Figurine Naruto Shippuden — Pain Chibi</div>
+            <div class="product-price"><span class="currency">FCFA </span>15 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 — Figurine Sukuna Hedo -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="figurines">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Figurine-Sukuna-Hedo.jpg" alt="Figurine Sukuna" />
+            <span class="product-badge new">Nouveau</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="fig-005"
+                      data-product-name="Figurine JJK — Sukuna" data-product-price="22000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Figurines</div>
+            <div class="product-name">Figurine JJK — Ryomen Sukuna 1/6</div>
+            <div class="product-price"><span class="currency">FCFA </span>22 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 — Pull JJK -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="vetements">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Pull-jjk.jpg" alt="Pull Jujutsu Kaisen" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="vet-001"
+                      data-product-name="Hoodie Jujutsu Kaisen" data-product-price="12000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Vêtements</div>
+            <div class="product-name">Hoodie Jujutsu Kaisen — Gojo & Megumi</div>
+            <div class="product-price"><span class="currency">FCFA </span>12 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 — Pull Kaneki -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="vetements">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Pull-Kaneki.jpg" alt="Pull Tokyo Ghoul Kaneki" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="vet-002"
+                      data-product-name="Hoodie Tokyo Ghoul — Kaneki" data-product-price="12000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Vêtements</div>
+            <div class="product-name">Hoodie Tokyo Ghoul — Ken Kaneki</div>
+            <div class="product-price"><span class="currency">FCFA </span>12 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 — Pull Obito -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="vetements">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Pull-Obito.jpg" alt="Pull Obito Naruto" />
+            <span class="product-badge hot">Populaire</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="vet-003"
+                      data-product-name="Hoodie Naruto — Obito" data-product-price="12000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Vêtements</div>
+            <div class="product-name">Hoodie Naruto — Obito Uchiha</div>
+            <div class="product-price"><span class="currency">FCFA </span>12 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 9 — Pull Sukuna x Yuji -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="vetements">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Pull-Sukuna-x-Yuji.jpg" alt="Pull Sukuna x Yuji" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="vet-004"
+                      data-product-name="Hoodie JJK — Sukuna x Yuji" data-product-price="12000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Vêtements</div>
+            <div class="product-name">Hoodie JJK — Sukuna x Yuji Itadori</div>
+            <div class="product-price"><span class="currency">FCFA </span>12 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 10 — Pull Zoro -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="vetements">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Pull-Zoro.jpg" alt="Pull Roronoa Zoro One Piece" />
+            <span class="product-badge new">Nouveau</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="vet-005"
+                      data-product-name="Hoodie One Piece — Roronoa Zoro" data-product-price="12000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Vêtements</div>
+            <div class="product-name">Hoodie One Piece — Roronoa Zoro Sakura</div>
+            <div class="product-price"><span class="currency">FCFA </span>12 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 11 — Chaussure Sasuke -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="accessoires">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Chaussure-Sasuke.jpg" alt="Chaussures Sasuke Naruto" />
+            <span class="product-badge hot">Coup de cœur</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="acc-001"
+                      data-product-name="Chaussures Naruto — Sasuke" data-product-price="15000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Accessoires</div>
+            <div class="product-name">Sneakers Naruto — Sasuke Uchiha Edition</div>
+            <div class="product-price"><span class="currency">FCFA </span>15 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 12 — Babouche One Piece -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="accessoires">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Babouche-One-piece.jpg" alt="Babouches One Piece" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="acc-002"
+                      data-product-name="Babouches One Piece" data-product-price="4300">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Accessoires</div>
+            <div class="product-name">Claquettes / Babouches One Piece</div>
+            <div class="product-price"><span class="currency">FCFA </span>4 300</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 13 — Collier Akatsuki -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="accessoires">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/colier-Akatsuki.jpg" alt="Collier Akatsuki Naruto" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="acc-003"
+                      data-product-name="Collier Akatsuki — Nuage Rouge" data-product-price="2000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Accessoires</div>
+            <div class="product-name">Collier Akatsuki — Nuage Rouge Naruto</div>
+            <div class="product-price"><span class="currency">FCFA </span>2 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 14 — Coque Sukuna -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="accessoires">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Coque-Sukuna.jpg" alt="Coque téléphone Sukuna JJK" />
+            <span class="product-badge new">Nouveau</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="acc-004"
+                      data-product-name="Coque iPhone — Sukuna JJK" data-product-price="3500">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Accessoires</div>
+            <div class="product-name">Coque Transparente iPhone — JJK Sukuna & Gojo</div>
+            <div class="product-price"><span class="currency">FCFA </span>3 500</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 15 — Montre Ying Yang -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="accessoires">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/Montre-Ying-Yang.jpg" alt="Montre gousset Yin Yang anime" />
+            <span class="product-badge hot">Populaire</span>
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="acc-005"
+                      data-product-name="Montre Gousset Yin Yang Anime" data-product-price="6000">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Accessoires</div>
+            <div class="product-name">Montre Gousset Yin Yang — Style Anime</div>
+            <div class="product-price"><span class="currency">FCFA </span>6 000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 16 — Tatouage Naruto -->
+      <div class="col-sm-6 col-lg-4 product-card-wrap reveal" data-category="goodies">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/tatouage-Naruto.jpg" alt="Tatouage temporaire Naruto" />
+            <div class="product-overlay">
+              <button class="btn-overlay"
+                      data-add-cart data-product-id="god-001"
+                      data-product-name="Tatouage Temporaire Naruto" data-product-price="3500">
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Goodies</div>
+            <div class="product-name">Tatouage Temporaire Naruto — Pack Symboles (1 à 3 500 FCFA)</div>
+            <div class="product-price"><span class="currency">FCFA </span>3 500</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /row -->
+
+    <div class="text-center mt-5 reveal">
+      <a href="https://wa.me/24174837720?text=Bonjour%2C%20je%20voudrais%20voir%20plus%20d'articles%20!" 
+         target="_blank" class="btn-primary-custom">
+        <i class="bi bi-whatsapp me-2"></i>Voir plus d'articles sur WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURED CAROUSEL
+══════════════════════════════════════════════════════════ -->
+<section id="featured">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label jp-text">注目のアイテム</span>
+      <h2 class="section-title display-font">Articles en Vedette</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="position-relative reveal">
+      <div id="featuredCarousel" class="carousel slide carousel-custom" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div class="carousel-inner-card">
+              <div class="carousel-img-side">
+                <div class="carousel-img-placeholder">
+                  <span class="icon">⛩️</span>
+                  <p style="font-size:.8rem;color:var(--text-dim)">Ajoutez votre image ici</p>
+                </div>
+              </div>
+              <div class="carousel-text-side">
+                <span class="badge-tag jp-text">✦ Nouveauté de la semaine</span>
+                <h3>Collection Demon Slayer</h3>
+                <p>Plongez dans l'univers de Tanjiro et ses compagnons. Figurines, vêtements et accessoires inspirés de l'une des séries les plus populaires du moment.</p>
+                <a href="https://wa.me/24174837720?text=Je suis intéressé par la collection Demon Slayer" 
+                   target="_blank" class="btn-primary-custom">Commander maintenant</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div class="carousel-inner-card">
+              <div class="carousel-img-side">
+                <div class="carousel-img-placeholder">
+                  <span class="icon">🌀</span>
+                  <p style="font-size:.8rem;color:var(--text-dim)">Ajoutez votre image ici</p>
+                </div>
+              </div>
+              <div class="carousel-text-side">
+                <span class="badge-tag jp-text">✦ Best-seller</span>
+                <h3>Collection Jujutsu Kaisen</h3>
+                <p>Les arts occultes n'ont jamais été aussi stylés. Notre collection Jujutsu Kaisen vous offre le meilleur de l'univers de Gojo et Yuji Itadori.</p>
+                <a href="https://wa.me/24174837720?text=Je suis intéressé par la collection Jujutsu Kaisen" 
+                   target="_blank" class="btn-primary-custom">Commander maintenant</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item">
+            <div class="carousel-inner-card">
+              <div class="carousel-img-side">
+                <div class="carousel-img-placeholder">
+                  <span class="icon">🏴‍☠️</span>
+                  <p style="font-size:.8rem;color:var(--text-dim)">Ajoutez votre image ici</p>
+                </div>
+              </div>
+              <div class="carousel-text-side">
+                <span class="badge-tag jp-text">✦ Classique intemporel</span>
+                <h3>Collection One Piece</h3>
+                <p>À la conquête du Grand Line en style ! Notre sélection One Piece regroupe les meilleurs articles dédiés aux pirates de Luffy et à l'univers de Eiichiro Oda.</p>
+                <a href="https://wa.me/24174837720?text=Je suis intéressé par la collection One Piece" 
+                   target="_blank" class="btn-primary-custom">Commander maintenant</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════════════ -->
+<section id="about-page">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label jp-text">私たちについて</span>
+      <h2 class="section-title display-font">À Propos</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="row align-items-center g-5">
+      <!-- Portrait / Logo -->
+      <div class="col-lg-5 reveal">
+        <div class="about-portrait">
+          <div class="about-logo-wrap">
+            <img src="images/logo.png" alt="AD&M Otaku's"
+                 onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 260 260\'><circle cx=\'130\' cy=\'130\' r=\'130\' fill=\'%230d0d1a\'/><text x=\'50%25\' y=\'35%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'50\' fill=\'%23c9a84c\'>AD</text><text x=\'50%25\' y=\'55%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'40\' fill=\'%23d63faa\'>&amp;M</text><text x=\'50%25\' y=\'75%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'22\' fill=\'%23e8dcc8\' font-style=\'italic\'>Otaku\'s</text></svg>'" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="col-lg-7 about-text reveal">
+        <h2>La boutique otaku <span class="text-magenta">du Gabon</span></h2>
+        <p>
+          <strong>AD&M Otaku's</strong> est une boutique dédiée aux fans d'animés et de culture japonaise basée à Libreville, Gabon. 
+          Fondée par <strong>Chancelle Ngui Mezui</strong>, passionnée d'anime, la boutique propose une large sélection d'articles 
+          en provenance directe — sans frais de douane ni de kilo supplémentaires.
+        </p>
+        <p>
+          ✨ Que vous soyez fan de <em>Demon Slayer</em>, <em>One Piece</em>, <em>Naruto</em>, <em>Jujutsu Kaisen</em> 
+          ou de toute la pop culture japonaise, vous êtes au bon endroit. Vous avez un article en tête ? 
+          Envoyez-nous une capture d'écran et nous le trouverons pour vous !
+        </p>
+
+        <!-- Stats -->
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number text-gold">500+</span>
+            <span class="stat-label">Articles disponibles</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number text-magenta">200+</span>
+            <span class="stat-label">Clients satisfaits</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number text-cyan">2–3</span>
+            <span class="stat-label">Semaines de livraison</span>
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="payment-methods">
+          <h5>💳 Modes de paiement</h5>
+          <span class="payment-badge">📱 Airtel Money</span>
+          <div style="font-size:.8rem;color:var(--text-secondary);margin-top:.75rem">
+            Numéro : <strong style="color:var(--gold)">+241 074 837 720</strong><br>
+            Nom : <strong style="color:var(--text-primary)">NGUI MEZUI Chancelle</strong><br>
+            <em style="font-size:.75rem">Une avance est requise pour valider la commande.</em>
+          </div>
+        </div>
+
+        <!-- Delivery info -->
+        <div class="mt-3 p-3 rune-border" style="background:var(--bg-card);border-radius:4px">
+          <div style="font-family:var(--font-title);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem">
+            🚚 Frais de livraison
+          </div>
+          <div style="font-size:.85rem;color:var(--text-secondary)">
+            Libreville : <strong style="color:var(--text-primary)">2 000 FCFA</strong><br>
+            Akanda / Owendo : <strong style="color:var(--text-primary)">3 000 FCFA</strong><br>
+            Points de rencontre : <em>La Baie des Rois & autres lieux</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOG
+══════════════════════════════════════════════════════════ -->
+<section id="blog">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label jp-text">ブログ</span>
+      <h2 class="section-title display-font">Notre Blog</h2>
+      <p class="section-desc">Actus anime, guides & culture pop japonaise</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Post 1 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-img">
+            <div class="blog-img-placeholder">⚔️</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="tag">Anime</span>
+              <span>15 Juin 2025</span>
+            </div>
+            <h4>Les 10 figurines les plus recherchées en 2025</h4>
+            <p>De Gojo Satoru à Zoro One Piece, découvrez quelles figurines font fureur cette année dans le monde otaku.</p>
+            <a href="#" class="blog-read-more">Lire la suite <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-img">
+            <div class="blog-img-placeholder">🇯🇵</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="tag">Culture</span>
+              <span>2 Juin 2025</span>
+            </div>
+            <h4>Comment porter la mode inspirée des animes au quotidien</h4>
+            <p>Conseils pour intégrer les vêtements et accessoires anime dans votre style quotidien sans paraître en cosplay.</p>
+            <a href="#" class="blog-read-more">Lire la suite <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 3 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-img">
+            <div class="blog-img-placeholder">🌸</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="tag">Guide</span>
+              <span>20 Mai 2025</span>
+            </div>
+            <h4>Débuter dans la collection de figurines : notre guide complet</h4>
+            <p>Vous souhaitez commencer à collectionner des figurines anime ? Voici tout ce qu'il faut savoir avant votre premier achat.</p>
+            <a href="#" class="blog-read-more">Lire la suite <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NEWSLETTER
+══════════════════════════════════════════════════════════ -->
+<section style="padding:4rem 0;background:linear-gradient(135deg,rgba(214,63,170,0.05),rgba(63,201,214,0.05))">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 text-center reveal">
+        <span class="section-label jp-text">ニュースレター</span>
+        <h3 class="display-font" style="color:var(--gold);font-size:1.8rem;margin-bottom:1rem">
+          Rejoins la famille Otaku !
+        </h3>
+        <p style="color:var(--text-secondary);margin-bottom:2rem;font-size:.9rem">
+          Reçois en avant-première nos nouvelles arrivées, promotions et actualités anime 🇯🇵
+        </p>
+        <form id="newsletterForm" class="d-flex gap-2 justify-content-center flex-wrap">
+          <input type="email" class="form-control-custom" placeholder="Votre e-mail..."
+                 style="max-width:320px;border-radius:2px" required />
+          <button type="submit" class="btn-primary-custom" style="white-space:nowrap">
+            S'inscrire ✨
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════════ -->
+<section id="contact" style="padding:6rem 0">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label jp-text">お問い合わせ</span>
+      <h2 class="section-title display-font">Contactez-nous</h2>
+      <p class="section-desc">Nous sommes là pour vous aider 💜</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Info -->
+      <div class="reveal">
+        <h3>Parlons ensemble</h3>
+        <div style="color:var(--text-secondary);font-size:.85rem;margin-bottom:2rem">
+          Envoyez-nous un message, que ce soit pour une commande, une question ou une suggestion.
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div class="contact-item-text">
+            <div class="label">WhatsApp / Airtel Money</div>
+            <div class="value">
+              <a href="https://wa.me/24174837720">+241 074 837 720</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <div class="label">Localisation</div>
+            <div class="value">Libreville, Gabon 🇬🇦</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div class="contact-item-text">
+            <div class="label">Délai de réponse</div>
+            <div class="value">Sous 24h (hors jours fériés)</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📦</div>
+          <div class="contact-item-text">
+            <div class="label">Délai de livraison</div>
+            <div class="value">2 à 3 semaines après commande</div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://wa.me/24174837720" target="_blank" class="social-link" title="WhatsApp">
+            <i class="bi bi-whatsapp"></i>
+          </a>
+          <a href="https://www.instagram.com/otaku_gabon" target="_blank" class="social-link" title="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="reveal">
+        <div class="contact-form-wrap">
+          <form id="contactForm">
+            <div id="formSuccess" class="form-success-msg">
+              <div class="check">✅</div>
+              <h4 style="font-family:var(--font-title);color:var(--gold)">Message envoyé !</h4>
+              <p style="color:var(--text-secondary)">Nous vous répondrons très bientôt. Merci 💌</p>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label-custom" for="contactName">Nom complet *</label>
+                <input type="text" id="contactName" class="form-control-custom"
+                       placeholder="Votre nom" autocomplete="name" />
+                <div class="error-msg" id="contactNameError"></div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label-custom" for="contactEmail">E-mail *</label>
+                <input type="email" id="contactEmail" class="form-control-custom"
+                       placeholder="votre@email.com" autocomplete="email" />
+                <div class="error-msg" id="contactEmailError"></div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label-custom" for="contactPhone">Téléphone</label>
+                <input type="tel" id="contactPhone" class="form-control-custom"
+                       placeholder="+241 xxx xxx xxx" autocomplete="tel" />
+                <div class="error-msg" id="contactPhoneError"></div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label-custom" for="contactSubject">Sujet *</label>
+                <select id="contactSubject" class="form-control-custom">
+                  <option value="">Choisir un sujet…</option>
+                  <option>Commander un article</option>
+                  <option>Demande de renseignements</option>
+                  <option>Problème de commande</option>
+                  <option>Suggestion d'article</option>
+                  <option>Autre</option>
+                </select>
+                <div class="error-msg" id="contactSubjectError"></div>
+              </div>
+              <div class="col-12">
+                <label class="form-label-custom" for="contactMessage">Message *</label>
+                <textarea id="contactMessage" class="form-control-custom"
+                          placeholder="Décrivez votre demande ici…" rows="5"></textarea>
+                <div class="error-msg" id="contactMessageError"></div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-primary-custom w-100">
+                  Envoyer le message →
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <!-- Brand -->
+      <div class="col-lg-4">
+        <div class="footer-logo display-font">AD&M Otaku's</div>
+        <div class="footer-brand-sub jp-text">アニメ ショップ · Gabon</div>
+        <p class="footer-desc">
+          Votre boutique de référence en culture anime et pop japonaise au Gabon. 
+          Figurines, vêtements et accessoires livrés à Libreville.
+        </p>
+        <div class="social-links mt-3">
+          <a href="https://wa.me/24174837720" target="_blank" class="social-link" title="WhatsApp">
+            <i class="bi bi-whatsapp"></i>
+          </a>
+          <a href="https://www.instagram.com/otaku_gabon" target="_blank" class="social-link" title="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="col-sm-6 col-lg-2">
+        <div class="footer-heading">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Accueil</a></li>
+          <li><a href="#shop">Boutique</a></li>
+          <li><a href="#featured">Nouveautés</a></li>
+          <li><a href="#about-page">À propos</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="col-sm-6 col-lg-2">
+        <div class="footer-heading">Catégories</div>
+        <ul class="footer-links">
+          <li><a href="#shop">Figurines</a></li>
+          <li><a href="#shop">Vêtements</a></li>
+          <li><a href="#shop">Accessoires</a></li>
+          <li><a href="#shop">Posters</a></li>
+          <li><a href="#shop">Goodies</a></li>
+        </ul>
+      </div>
+
+      <!-- Commande -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="footer-heading">Comment commander ?</div>
+        <div style="font-size:.8rem;color:var(--text-dim);line-height:1.9">
+          <div>📸 Envoyez une capture d'écran de l'article</div>
+          <div>💬 Via WhatsApp ou Instagram</div>
+          <div>💳 Paiement via Airtel Money</div>
+          <div>📦 Livraison en 2–3 semaines</div>
+          <div style="margin-top:.75rem">
+            <a href="https://wa.me/24174837720" target="_blank"
+               class="btn-primary-custom" style="font-size:.7rem;padding:.6rem 1.5rem">
+              <i class="bi bi-whatsapp me-2"></i>Commander maintenant
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Catalogue</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-            </div>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
 
-    <main class="container my-5">
-        <header class="text-center mb-5">
-            <img src="logo.png" alt="Grand Logo AD&MI" class="img-fluid my-4" style="max-width: 300px;">
-            <h1 class="display-3 fw-bold">Bienvenue chez <span class="text-neon-pink">A</span>D&<span class="text-neon-blue">MI</span>!</h1>
-            <p class="lead mt-3 fs-3">✨ Fan d'animés et de pop culture japonaise au Gabon ✨</p>
-        </header>
+    <div class="footer-bottom">
+      <p>© 2025 AD&M Otaku's · Tous droits réservés · Libreville, Gabon 🇬🇦</p>
+      <p style="color:var(--text-dim);font-size:.7rem">
+        Fait avec 💜 pour les fans d'anime
+      </p>
+    </div>
+  </div>
+</footer>
 
-        <section class="row g-4">
-            <h2 class="text-center text-neon-blue mb-4">Nouveaux Arrivages 👺</h2>
-            
-            <div class="col-md-6 col-lg-4">
-                <div class="card bg-black text-light border-0 shadow h-100">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Figurine Luffy">
-                    <div class="card-body">
-                        <h5 class="card-title">Figurine Luffy (Gear 5)</h5>
-                        <p class="card-text">Collection exclusive. Livraison sous 2 semaines.</p>
-                        <p class="fw-bold fs-5">15 000 Fcfa</p>
-                        <a href="https://instagram.com/otaku_gabon" class="btn btn-outline-light w-100" target="_blank">Voir sur Insta</a>
-                    </div>
-                </div>
-            </div>
+<!-- ══════════════════════════════════════════════════════════
+     CART MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="modal fade" id="cartModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">🛒 Mon Panier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="cartModalBody">
+        <p class="text-center" style="color:var(--text-dim);padding:2rem">Votre panier est vide</p>
+      </div>
+      <div class="modal-footer">
+        <a href="https://wa.me/24174837720?text=Bonjour%2C%20je%20voudrais%20commander%20des%20articles%20!"
+           target="_blank" class="btn-primary-custom" style="font-size:.75rem;padding:.7rem 1.5rem">
+          <i class="bi bi-whatsapp me-2"></i>Finaliser sur WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-             <div class="col-md-6 col-lg-4">
-                <div class="card bg-black text-light border-0 shadow h-100">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="T-shirt Naruto">
-                    <div class="card-body">
-                        <h5 class="card-title">T-shirt Naruto Modo Sennin</h5>
-                        <p class="card-text">Vêtement inspiré de la culture japonaise.</p>
-                        <p class="fw-bold fs-5">8 000 Fcfa</p>
-                        <a href="https://instagram.com/otaku_gabon" class="btn btn-outline-light w-100" target="_blank">Voir sur Insta</a>
-                    </div>
-                </div>
-            </div>
-            
-        </section>
-    </main>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="js/main.js"></script>
 
-    <footer class="bg-black text-secondary py-4 mt-5">
-        <div class="container text-center">
-            <p>&copy; 2024 AD&MI Otaku's Gabon. Tous droits réservés.</p>
-            <p>Hébergé avec succès sur <a href="https://vercel.com" class="text-light" target="_blank">Vercel</a>.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
