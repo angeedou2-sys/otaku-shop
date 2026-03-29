@@ -1,0 +1,60 @@
+/* --- Couleurs personnalisées basées sur ton logo --- */
+:root {
+    --otaku-pink: #ff00ff; /* Magenta néon */
+    --otaku-blue: #00d4ff; /* Bleu cyan néon */
+    --bg-darker: #050a14;  /* Un bleu très sombre pour le fond */
+}
+
+body {
+    background-color: var(--bg-darker);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Effets Néon pour les titres --- */
+.text-neon-pink {
+    color: var(--otaku-pink);
+    text-shadow: 0 0 10px var(--otaku-pink);
+}
+
+.text-neon-blue {
+    color: var(--otaku-blue);
+    text-shadow: 0 0 10px var(--otaku-blue);
+}
+
+/* --- Personnalisation des cartes (Cards) --- */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+    border-color: var(--otaku-blue);
+}
+
+/* --- Personnalisation des boutons --- */
+.btn-outline-light:hover {
+    background-color: var(--otaku-pink);
+    border-color: var(--otaku-pink);
+    color: white;
+}
+
+/* --- Barre de navigation --- */
+.navbar {
+    border-bottom: 2px solid var(--otaku-pink);
+}
+
+.nav-link:hover {
+    color: var(--otaku-blue) !important;
+}
+
+/* --- Section Spéciale : Les avantages (Douane, etc.) --- */
+.badge-promo {
+    background: linear-gradient(45deg, var(--otaku-pink), var(--otaku-blue));
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-block;
+}
